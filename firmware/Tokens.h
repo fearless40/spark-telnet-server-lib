@@ -3,7 +3,7 @@
 #ifndef __COMMANDLINE_TOKENS__
 #define __COMMANDLINE_TOKENS__
 
-namespace CommandLine {
+namespace CommandEngine {
 
 
 // Single linked list with a few quirks

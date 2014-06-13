@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace CommandLine {
+namespace CommandEngine {
 
 class CommandLineEngine
 {

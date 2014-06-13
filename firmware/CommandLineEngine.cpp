@@ -6,7 +6,7 @@
 #include "CommandLineEngine.h"
 
 
-using namespace CommandLine;
+using namespace CommandEngine;
 
 class NullPrinter : public Print {
 public:
