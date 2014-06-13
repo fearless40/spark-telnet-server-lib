@@ -41,41 +41,38 @@ Example Usage
 
 Incredibly easy to use.
 
-/code
-
-CommandEngine::CommandLineEngine eng;
-
-void Command_AnalogWrite( Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff )
-{
-	// Do something in here
-}
-
-DECLARE_COMMAND(Command_digitalWrite)
-	// Do your digitalwrite stuff in here
-DECLARE_COMMAND_END
 
 
-void startup() {
+	CommandEngine::CommandLineEngine eng;
+
+	void Command_AnalogWrite( Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff )
+	{
+		// Do something in here
+	}
+
+	DECLARE_COMMAND(Command_digitalWrite)
+		// Do your digitalwrite stuff in here
+	DECLARE_COMMAND_END
 
 
-eng.registerMacro("high","1");
-eng.registerMacro("low","0");
-
-eng.registerFunction("analogWrite", Command_AnalogWrite);
-eng.registerFunction("digitalWrite", Command_digitalWrite);
-
-}
-
-void loop() {
-
-	String input;
-	
-	eng.execute(input, Serial);
-}
+	void startup() {
 
 
+	eng.registerMacro("high","1");
+	eng.registerMacro("low","0");
 
-/end code
+	eng.registerFunction("analogWrite", Command_AnalogWrite);
+	eng.registerFunction("digitalWrite", Command_digitalWrite);
+
+	}
+
+	void loop() {
+
+		String input;
+		
+		eng.execute(input, Serial);
+	}
+
 
 The above snippet of code will register two macros that represent high and low in the commands. The registerFunction will 
 register a custom function to be called by the user. 
@@ -132,41 +129,41 @@ Example
 
 You need to define a function that will be used as a callback whenever the server detects that it has input. The definition 
 of the function is:
-typedef void (*processInputCallBack)(Server *,String , int );
+	typedef void (*processInputCallBack)(Server *,String , int );
 
 In other words:
 
-void processInput( Telnet::Server * ts, String txt, int flags );
+	void processInput( Telnet::Server * ts, String txt, int flags );
 
 Flags is defined as one of the following values:
-enum Callbackflags {
-	CBF_WelcomeMsg 	= 	0x1,
-	CBF_InputCmd	=	0x2,
-	CBF_Error	= 	0x4,
-	CBF_CmdPrompt	= 	0x8,
-}
+	enum Callbackflags {
+		CBF_WelcomeMsg 	= 	0x1,
+		CBF_InputCmd	=	0x2,
+		CBF_Error	= 	0x4,
+		CBF_CmdPrompt	= 	0x8,
+	}
 
 I currently do not OR them together so a simple switch statement will surfice.
 
 To actually use the server the code will look something like this:
 
-Telnet::Server tServer(8000);	
+	Telnet::Server tServer(8000);	
 
-void setup() {
+	void setup() {
 
-	// Set the function to be called when the telnet server process the input
-	tServer.setProcessCallback(processData);
+		// Set the function to be called when the telnet server process the input
+		tServer.setProcessCallback(processData);
 
-	// Start the server and connect
-	tServer.connect();
-    
-	// End Telnet server setup
-}
+		// Start the server and connect
+		tServer.connect();
+		
+		// End Telnet server setup
+	}
 
-void loop() {
+	void loop() {
 
-	tServer.poll();
-}
+		tServer.poll();
+	}
 
 Recommended Components
 ----------------------
