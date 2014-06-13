@@ -1,8 +1,8 @@
+#include "telnet-server-lib/telnet-server-lib.h"
 
-#include "telnet-library/telnet.h"
 
 Telnet::Server tServer(8000);
-CommandEngine::CommandLineEngine cleg;
+CommandEngine::CommandEngineEngine cleg;
 
 // Called when the telnet server is ready to send you data
 void processData( Telnet::Server * ts, String txt, int flags ) {
@@ -24,7 +24,7 @@ void processData( Telnet::Server * ts, String txt, int flags ) {
 
 	 default:
 		// Process the command
-		cleg.execute( txt, ts );					// call the CommandLineEngine
+		cleg.execute( txt, ts );					// call the CommandEngineEngine
 		ts->forceCommandPrompt();					// force the command prompt
 	}
 }
@@ -105,9 +105,9 @@ String ConvertPinModeToString( int pinMode ) {
 
 // Custom commands for the telnet server
 
-void CommandFunction_PinMode( Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff)
+void CommandFunction_PinMode( Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff)
 {
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Help with PinMode command:");
 		printer->println("PinMode [pin name] [pin mode]");
@@ -150,9 +150,9 @@ void CommandFunction_PinMode( Print * printer, CommandEngine::Tokens & tk, Comma
 	}
 }
 
-void CommandFunction_DigitalWrite(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff)
+void CommandFunction_DigitalWrite(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff)
 {
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Help with DigitalWrite command:");
 		printer->println("DigitalWrite [pin name] $high/$low/0/1");
@@ -186,9 +186,9 @@ void CommandFunction_DigitalWrite(Print * printer, CommandEngine::Tokens & tk, C
 	printer->print("Set pin: "); printer->print(pinName); printer->print(" to value: "); printer->println( value );
 }
 
-void CommandFunction_AnalogWrite(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff)
+void CommandFunction_AnalogWrite(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff)
 {
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Help with AnalogWrite command:");
 		printer->println("AnalogWrite [pin name] 0-255");
@@ -226,9 +226,9 @@ void CommandFunction_AnalogWrite(Print * printer, CommandEngine::Tokens & tk, Co
 	printer->print("Set pin: "); printer->print(pinName); printer->print(" = "); printer->println( value );
 }
 
-void CommandFunction_AnalogRead(Print * printer, CommandEngine::Tokens & tk, Telnet::CommandLineEngine::FunctionFlags ff)
+void CommandFunction_AnalogRead(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff)
 {
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Help with AnalogRead command:");
 		printer->println("AnalogRead [pin name] ");
@@ -260,9 +260,9 @@ void CommandFunction_AnalogRead(Print * printer, CommandEngine::Tokens & tk, Tel
 	printer->print("Value of pin: "); printer->print(pinName); printer->print(" = "); printer->println( value );
 }
 
-void CommandFunction_DigitalRead(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff)
+void CommandFunction_DigitalRead(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff)
 {
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Help with DigitalRead command:");
 		printer->println("DigitalRead [pin name] ");
@@ -291,9 +291,9 @@ void CommandFunction_DigitalRead(Print * printer, CommandEngine::Tokens & tk, Co
 }
 
 
-void CommandFunction_echo(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff)
+void CommandFunction_echo(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff)
 {
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Help with Echo command:");
 		printer->println("echo [value1] [value2] [value3] [value...]");
@@ -308,9 +308,9 @@ void CommandFunction_echo(Print * printer, CommandEngine::Tokens & tk, CommandEn
 	}
 }
 
-void CommandFunction_information(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandLineEngine::FunctionFlags ff) {
+void CommandFunction_information(Print * printer, CommandEngine::Tokens & tk, CommandEngine::CommandEngineEngine::FunctionFlags ff) {
 
-	if( ff == CommandEngine::CommandLineEngine::FF_HelpText )
+	if( ff == CommandEngine::CommandEngineEngine::FF_HelpText )
 	{
 		printer->println("Lists some useful information.");
 		printer->println("No arguments needed for this function.");
